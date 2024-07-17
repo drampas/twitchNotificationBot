@@ -1,0 +1,6 @@
+clientId: your-client-id
+clientSecret: your-client-secret
+channels: [channel-1,channel-2,channel-3,channel-4,channel-5,channel-6]
+
+# clientId and clientSecret provided by registering your app at https://dev.twitch.tv/
+# add the channels you want to be notified for to the list

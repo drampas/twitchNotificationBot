@@ -1,0 +1,5 @@
+token: your-token
+channelId: your-channel-id
+
+# token provided by registering the application and adding a bot at https://discord.com/developers/applications
+# channelId:the id of the discord channel you want to receive notifications in

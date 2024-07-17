@@ -1,19 +1,28 @@
 package com.drampas.twitchBot;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
 public class BotConfiguration {
-    private final Logger logger = LoggerFactory.getLogger(BotConfiguration.class);
+    private String clientId;
+    private String clientSecret;
     private ArrayList<String> channels=new ArrayList<>();
 
-    public BotConfiguration(ArrayList<String> channels) {
-        this.channels = channels;
-        logger.info("list of channels:"+channels);
+    public String getClientId() {
+        return clientId;
     }
 
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
     public ArrayList<String> getChannels() {
         return channels;
     }
@@ -21,5 +30,4 @@ public class BotConfiguration {
     public void setChannels(ArrayList<String> channels) {
         this.channels = channels;
     }
-
 }

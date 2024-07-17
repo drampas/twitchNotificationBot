@@ -1,28 +1,31 @@
 package com.drampas;
 
+import com.drampas.discordBot.DiscordBot;
+import com.drampas.discordBot.DiscordBotConfiguration;
 import com.drampas.twitchBot.BotConfiguration;
 import com.drampas.twitchBot.TwitchBot;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        //Adding channels to the bot list
-        //the channel list will be moved to the configuration.yml file
-        //along with the bots id and secret
-        ArrayList<String> channels=new ArrayList<>();
-        channels.add("Scrapie");
-        channels.add("AdmiralBahroo");
-        channels.add("SovietWomble");
-        channels.add("LongLiveQuebec");
-        channels.add("n_sacco98");
-        channels.add("Disnof");
-        channels.add("Apoooche");
-        channels.add("Distortion2");
-        channels.add("DolphinChemist");
 
-        TwitchBot bot=new TwitchBot(new BotConfiguration(channels));
-        bot.registerFeatures();
-        bot.start();
+        File twitchFile=new File("src/main/resources/botConfiguration.yaml");
+        File discordFile=new File("src/main/resources/discordBotConfiguration.yaml");
+        ObjectMapper mapper=new ObjectMapper(new YAMLFactory());
+        try {
+            BotConfiguration botConfiguration=mapper.readValue(twitchFile, BotConfiguration.class);
+            DiscordBotConfiguration discordBotConfiguration=mapper.readValue(discordFile, DiscordBotConfiguration.class);
+            TwitchBot twitchBot=new TwitchBot(botConfiguration);
+            DiscordBot discordBot=new DiscordBot(discordBotConfiguration);
+            twitchBot.registerFeatures(discordBot);
+            twitchBot.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
